@@ -28,9 +28,7 @@
  */
 void LOT_print_newline(void)
 {
-#ifdef _LOT_PRINT_NL_CR_
     LOT_print_str("\n\r");
-#endif
 }
 
 /**
