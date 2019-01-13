@@ -6,7 +6,6 @@ MCU_F_CPU  = 16000000UL
 PROGRAMMER = arduino
 
 # PORT = /dev/cu.usbserial-DN042E96
-# PORT = /dev/cu.wchusbserial146340
 PORT = /dev/ttyUSB0
 
 # BAUDRATE = 57600
@@ -43,12 +42,14 @@ rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 # C_SRCS  = $(call rwildcard,,*.c)
 C_SRCS = \
 src/main.c \
+../LOT_uart/LOT_uart0/LOT_uart0.c \
 
 BUILD_DIR = build
 
 # 헤더파일 경로 추가
-# C_INCS = $(addprefix -I,$(dir $(call rwildcard,,*.h)))
+# C_INCS = $(dir $(call rwildcard,,*.h))
 C_INCS = \
+../LOT_uart/LOT_uart0 \
 
 .PHONY: clean upload
 
@@ -64,7 +65,7 @@ $(BUILD_DIR):
 # 목적 파일, 어샘블리어 파일 생성
 vpath %.c $(sort $(dir $(C_SRCS)))
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(C_INCS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) -c -o $@ $<
+	$(CC) $(CFLAGS) $(addprefix -I,$(C_INCS)) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) -c -o $@ $<
 
 # 목적 파일 목록
 OBJS  = $(addprefix $(BUILD_DIR)/,$(notdir $(patsubst %.c,%.o,$(C_SRCS))))
