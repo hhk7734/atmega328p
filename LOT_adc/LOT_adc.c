@@ -33,7 +33,7 @@ uint16_t LOT_adc_read( const LOT_adc_pin_typedef adc_pin )
 {
     /// Voltage Reference : AVCC
     ADMUX = _BV( REFS0 ) | adc_pin;
-    /// ADC에 사용되는 clock이 100 Hz 이상으로 설정되어야 최대 분해능을 사용할 수 있음
+    /// ADC에 사용되는 clock이 100 kHz 이상으로 설정되어야 최대 분해능을 사용할 수 있음
 #if F_CPU >= 12800000UL
     ADCSRA = _BV( ADEN ) | _BV( ADSC ) | _BV( ADPS2 ) | _BV( ADPS1 ) | _BV( ADPS0 );
 #elif F_CPU >= 6400000UL
@@ -43,7 +43,9 @@ uint16_t LOT_adc_read( const LOT_adc_pin_typedef adc_pin )
 #endif
     while ( ADCSRA & _BV( ADSC ) )
         ; // wait
-    return ADCW;
+    uint16_t temp = ADCL;
+    temp = (ADCH << 8) | temp;
+    return temp;
 }
 
 /// @todo auto triggering
