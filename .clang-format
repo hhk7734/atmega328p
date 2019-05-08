@@ -1,6 +1,6 @@
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 Language: Cpp
-AccessModifierOffset: 0
+AccessModifierOffset: -4                        # public: private: 들여쓰기 offset
 AlignAfterOpenBracket: Align                    # 매개변수 정렬
 AlignConsecutiveAssignments: true               # 연속적인 변수 초기화 정렬
 AlignConsecutiveDeclarations: true              # 연속적인 타입 변수 정렬
@@ -8,18 +8,18 @@ AlignEscapedNewlines: Left                      # \ 줄바꾸기 가장 가까�
 AlignOperands:   true                           # 연산자 정렬
 AlignTrailingComments: true                     # 끝의 주석 정렬
 AllowAllParametersOfDeclarationOnNextLine: true # 길면 다음 줄로
-AllowShortBlocksOnASingleLine: false            # 짧은 {} 한 줄로
-AllowShortCaseLabelsOnASingleLine: false        # case 문 짧으면 한 줄로
-AllowShortFunctionsOnASingleLine: Empty         # 빈 함수만 한 줄로
-AllowShortIfStatementsOnASingleLine: false      # if 한 줄로
-AllowShortLoopsOnASingleLine: false             # 짧은 루프 한 줄로
+AllowShortBlocksOnASingleLine: true             # 짧은 {} 한 줄로
+AllowShortCaseLabelsOnASingleLine: true         # case 문 짧으면 한 줄로
+AllowShortFunctionsOnASingleLine: All           # 짧은 코드 한 줄로
+AllowShortIfStatementsOnASingleLine: true       # if 한 줄로
+AllowShortLoopsOnASingleLine: true              # 짧은 루프 한 줄로
 # AlwaysBreakAfterDefinitionReturnType: None    # 사라짐
 AlwaysBreakAfterReturnType: None                # 리턴타입 줄 바꿈
 AlwaysBreakBeforeMultilineStrings: false        # 여러 줄 str 처음 줄 바꿈
-# AlwaysBreakTemplateDeclarations: false
+AlwaysBreakTemplateDeclarations: Yes            # 템플릿 줄 바꿈
 BinPackArguments: true                          # 매개변수 정렬
-BinPackParameters: true                         # 선언시 매개변수 정렬
-BraceWrapping:   
+BinPackParameters: false                        # 선언시 매개변수 정렬
+BraceWrapping:
   AfterClass:      false
   AfterControlStatement: true                   # if, else, for 등 다음줄에 { 시작
   AfterEnum:       true
@@ -38,15 +38,14 @@ BraceWrapping:
 BreakBeforeBinaryOperators: All                 # 연산자 전에 줄 바꿈
 BreakBeforeBraces: Custom                       # BraceWrapping Custom
 BreakBeforeTernaryOperators: true               # ? : 연산자 전에 줄 바꿈
-# BreakBeforeInheritanceComma: false
-# BreakConstructorInitializersBeforeComma: false
-# BreakConstructorInitializers: BeforeColon
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
 # BreakAfterJavaFieldAnnotations: false
 # BreakStringLiterals: true
-ColumnLimit:     120                            # 한 줄 간격
+ColumnLimit:     100                            # 한 줄 간격
 # CommentPragmas:  '^ IWYU pragma:'
-# CompactNamespaces: false
-# ConstructorInitializerAllOnOneLineOrOnePerLine: false
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
 Cpp11BracedListStyle: false                     # {} 안에 띄어쓰기
@@ -54,12 +53,12 @@ DerivePointerAlignment: false                   # .PointerAlignmet fallback
 DisableFormat:   false
 # ExperimentalAutoDetectBinPacking: false
 # FixNamespaceComments: true
-# ForEachMacros:   
+# ForEachMacros:
 #   - foreach
 #   - Q_FOREACH
 #   - BOOST_FOREACH
 IncludeBlocks:   Preserve
-IncludeCategories: 
+IncludeCategories:
   - Regex:           '^"(llvm|llvm-c|clang|clang-c)/'
     Priority:        2
   - Regex:           '^(<|"(gtest|gmock|isl|json)/)'
@@ -70,14 +69,14 @@ IncludeIsMainRegex: '(Test)?$'
 IndentCaseLabels: true                          # switch case indent
 IndentPPDirectives: AfterHash                   # 전처리 indent
 IndentWidth:     4
-# IndentWrappedFunctionNames: false
+IndentWrappedFunctionNames: true
 # JavaScriptQuotes: Leave
 # JavaScriptWrapImports: true
 KeepEmptyLinesAtTheStartOfBlocks: false         # 시작시 빈줄 제거
 MacroBlockBegin: ''
 MacroBlockEnd:   ''
 MaxEmptyLinesToKeep: 1                          # 최대 빈 줄
-# NamespaceIndentation: None
+NamespaceIndentation: All
 # ObjCBlockIndentWidth: 4
 # ObjCSpaceAfterProperty: false
 # ObjCSpaceBeforeProtocolList: true
@@ -89,22 +88,26 @@ MaxEmptyLinesToKeep: 1                          # 최대 빈 줄
 # PenaltyExcessCharacter: 1000000
 # PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Right                         # uint16_t *a;
-# RawStringFormats: 
+# RawStringFormats:
 #   - Delimiter:       pb
 #     Language:        TextProto
 #     BasedOnStyle:    google
 ReflowComments:  false                          # comment 줄 변경
-SortIncludes:    true
+SortIncludes:    false
 SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
-SpaceAfterTemplateKeyword: true
+SpaceAfterTemplateKeyword: false
 SpaceBeforeAssignmentOperators: true            # = 앞 공백
-SpaceBeforeParens: ControlStatements
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: Never                        # () 앞 띄어쓰기
+SpaceBeforeRangeBasedForLoopColon: true
 SpaceInEmptyParentheses: false
-SpacesBeforeTrailingComments: 1
+SpacesBeforeTrailingComments: 4                 # // 앞 공백
 SpacesInAngles:  false
-SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: true
+SpacesInContainerLiterals: true
 SpacesInParentheses: true
 SpacesInSquareBrackets: false
 Standard:        Cpp11
