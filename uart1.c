@@ -11,9 +11,9 @@ int main(void)
 	while(1)
 	{
 		PORTB |= _BV(PB5);
-		delay_ms(100);
+		delay_ms(200);
 		PORTB &= ~_BV(PB5);
-		delay_ms(100);
+		delay_ms(400);
 	}
 
 	return 0;
