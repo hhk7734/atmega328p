@@ -11,6 +11,8 @@ int main( void )
 {
     uart0_init( 9600 );
 
+    uart0_putstr( "hello world!\r\n" );
+
     for( ;; )
     {
         if( uart0_available() )
