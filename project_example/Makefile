@@ -1,5 +1,6 @@
 TARGET = test
 
+DEBUG = 1
 OPTIMIZIATION = -O1
 
 MCU_TARGET = atmega328p
@@ -25,7 +26,7 @@ CP = objcopy
 OD = objdump
 SZ = size
 
-CFLAGS  = -g -Wall -mmcu=$(MCU_TARGET) -DF_CPU=$(MCU_F_CPU)
+CFLAGS  = -Wall -mmcu=$(MCU_TARGET) -DF_CPU=$(MCU_F_CPU)
 # 최적화
 CFLAGS += $(OPTIMIZIATION)
 CFLAGS += -ffunction-sections -fdata-sections
@@ -34,7 +35,11 @@ CFLAGS += -fpack-struct
 # 의존성
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 
-LDFLAGS  = -g -mmcu=$(MCU_TARGET) -Wl,-Map,$(BUILD_DIR)/$(TARGET).map
+ifeq ($(DEBUG), 1)
+CFLAGS += -g
+endif
+
+LDFLAGS  = -mmcu=$(MCU_TARGET) -Wl,-Map,$(BUILD_DIR)/$(TARGET).map
 LDFLAGS += -Wl,--gc-sections
 
 #$(call rwildcard,directory,filetype) directory 하위에서 형식에 맞는 모든 파일을 나열
