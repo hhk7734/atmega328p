@@ -12,7 +12,6 @@ extern "C" {
 #endif
 
 #include <avr/io.h>
-#include <avr/interrupt.h>
 
 /**
  * @brief UART 통신 초기화

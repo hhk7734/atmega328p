@@ -6,6 +6,8 @@
 
 #include "LOT_uart0.h"
 
+#include <avr/interrupt.h>
+
 void uart0_init_all( const uint32_t baud_rate,
                      const uint8_t  data_bits,
                      const uint8_t  stop_bits,
