@@ -7,7 +7,7 @@
                 "/usr/lib/avr/include"
             ],
             "defines": [
-                "F_CPU=16000000",
+                "F_CPU=16000000L",
                 "__AVR_ATmega328P__"
             ],
             "intelliSenseMode": "gcc-x64",
