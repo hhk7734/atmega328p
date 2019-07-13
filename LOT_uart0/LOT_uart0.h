@@ -1,7 +1,7 @@
 /**
  * @file LOT_uart0.h
  * @author Hyeon-ki, Hong (hhk7734@gmail.com)
- * @brief
+ * @brief ATmega328p UART0 통신
  */
 
 #ifndef _LOT_UART0_H_
