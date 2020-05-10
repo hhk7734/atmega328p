@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/usr/avr8-gnu-toolchain-linux_x86_64/avr/include"
+      ],
+      "defines": [
+        "__AVR_ATmega328P__",
+        "F_CPU"
+      ],
+      "compilerPath": "/usr/avr8-gnu-toolchain-linux_x86_64/bin/avr-gcc",
+      "cStandard": "c11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}
